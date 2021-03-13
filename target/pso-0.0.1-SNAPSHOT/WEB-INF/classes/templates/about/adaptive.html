@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head><title>PSO</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="col-md-2"/>
+<div class="col-md-8">
+    <div class="well bs-component">
+        <div align="justify">
+            <h2>Адаптивний ройовий алгоритм</h2>
+            <p>
+                Адаптивний алгоритм є різновидом ройового алгоритму, параметри якого(w, c<sub>1</sub>, c<sub>2</sub>,
+                r<sub>1</sub>, r<sub>2</sub>) змінюють з метою поліпшення ефективності алгоритму, залежно від умови задачі.
+            </p>
+            <p>
+                Адаптація, реалізована у ресурсі, називається IA-PSO(Inertia-Adaptive). Її суть заключається в модифікації
+                інерційного коефіцієнта(w), що обчислюється індивідуально для кожної частки так, що при віддаленні від
+                глобально найкращого рішення частка почне сповільнюватися, а при наближенні - прискорюватися. Таким чином,
+                інерційний коефіцієнт розраховується за формулою:
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <i> w<sub>i</sub> = w<sub>0</sub> &#8901; (1-dist<sub>i</sub>/max_dist)</i>
+                </div>
+            </div>
+            </p>
+            <p>де <strong>w<sub>0</sub> = rand(0.5,1)</strong>; <strong>dist<sub>i</sub></strong> - поточна відстань від <i>i</i>-ї частинки до глобально
+            оптимального рішення рою, що в свою чергу визначається як:
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <i>dist<sub>i</sub> = &radic; <span style="border-top: solid 1px #000000;">&Sigma;<sup>d</sup><sub>j=1</sub>(g<sub>j</sub>-x<sub>ij</sub>)<sup>2</sup></span> </i>
+                </div>
+            </div>
+            </p>
+            <p>а <strong>max_dist</strong> - найбільша відстань між певною часткою(що має найменш оптимальний розв'язок)
+            і глобально найращим рішенням рою.
+            </p>
+            <p>Оновлення позиції кожної ітерації відбувається за формулою
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <i>x`=(1-p)x<sub>ij</sub>+v`<sub>ij</sub></i>
+                </div>
+            </div>
+            </p>
+            <p><strong>p</strong> - випадкове число в межах [-0.25;0.25]</p>
+
+            <p>
+                Перейти до розв'язання задачі адаптивним алгоритмом:
+            <ul>
+                <li><a th:href="@{/solve/adaptive}">Адаптивний ройовим алгоритмом Inertia-Adaptive (IA-PSO)</a></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

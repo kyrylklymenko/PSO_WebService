@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: pso
+Implementation-Version: 0.0.1-SNAPSHOT
+Archiver-Version: Plexus Archiver
+Built-By: user
+Implementation-Vendor-Id: com.geiko
+Spring-Boot-Version: 1.5.2.RELEASE
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.springframework.boot.loader.WarLauncher
+Start-Class: com.geiko.PsoApplication
+Spring-Boot-Classes: WEB-INF/classes/
+Spring-Boot-Lib: WEB-INF/lib/
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_40
+Implementation-URL: http://projects.spring.io/spring-boot/pso/
+

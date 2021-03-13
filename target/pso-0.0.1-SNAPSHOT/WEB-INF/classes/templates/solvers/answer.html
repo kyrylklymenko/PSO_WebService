@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head><title>PSO</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="application/javascript" th:src="@{/js/charts.js}"/>
+
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="col-md-3"/>
+<div class="col-md-6">
+    <div class="well bs-component">
+        <h2>Результати:</h2>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#custom" data-toggle="tab" aria-expanded="true">Обрахунки</a></li>
+            <li class=""><a href="#test" data-toggle="tab" aria-expanded="false">Вхідні параметри</a></li>
+            <li class=""><a href="#properties" data-toggle="tab" aria-expanded="false">Графік/Протокол</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="custom">
+                <br/>
+                <h5>Результати обрахувань:</h5>
+                x* = {<span th:each="item : ${answer.x}"><br/><span style="margin-left: 40px"
+                                                                    th:text="${item}"/>;</span><br/><span
+                    style="margin-left: 33px">}</span>
+                <h5>Середнє значення функції:</h5>
+                f(x*) = <span th:text="${answer.f}"/>
+                <h5>Середня кількість ітерацій:</h5>
+                k = <span th:text="${answer.k}"/>
+                <h5>Середня кількість обрахування значень функції:</h5>
+                nf = <span th:text="${answer.nf}"/>
+                <h5>Кількість повторів:</h5>
+                <span th:text="${answer.n}"/>
+                <h5>Причина зупинки алгоритму:</h5>
+                <span th:text="${answer.stopCause}"/>
+            </div>
+            <div class="tab-pane fade" id="test">
+                <br/>
+                <h5>Функція: </h5>
+                <div th:unless="${problem.testFunction}">
+                    <div>F = <span th:text="${problem.function}"/></div>
+                </div>
+                <div th:if="${problem.testFunction}">
+                    <img id="functionImage" style="width:600px;height:270px;"
+                         th:src="@{'/images/'+${problem.function}+'.PNG'}"/>
+                </div>
+                <h5>Похибка:</h5>
+                e = <span th:text="${problem.e}"/>
+                <h5>Розмірність задачі:</h5>
+                d = <span th:text="${problem.d}"/>
+                <h5>Розмірність рою:</h5>
+                s = <span th:text="${problem.s}"/>
+                <h5>Простір пошуку:</h5>
+                [ -<span th:text="${problem.maxSearchSpace}"/> ; <span th:text="${problem.maxSearchSpace}"/> ]
+                <h5>Інерційний параметр:</h5>
+                w = <span th:text="${properties.w}"/>
+                <h5>Когнітивний параметр:</h5>
+                c1 = <span th:text="${properties.kogn}"/>
+                <h5>Соціальний параметр:</h5>
+                c2 = <span th:text="${properties.soc}"/>
+            </div>
+            <div class="tab-pane fade" id="properties">
+                <div>
+                    <br/>
+                    <div th:if="${problem.d}==2">
+                        <script type="application/javascript" th:src="@{/js/xCharts.js}"/>
+                        <script th:inline="javascript">
+                            setMAXX([[${problem.maxSearchSpace}]]);
+                            getX([[${answer.dataForX}]]);
+                        </script>
+                        <div id="chart_div"></div>
+                        <button id="retry" class="btn btn-primary btn-sm">&#8634;</button>
+                        <button id="slowly" class="btn btn-primary btn-sm">&#9668;&#9668;</button>
+                        <button id="faster" class="btn btn-primary btn-sm">&#9658;&#9658;</button>
+                        <button id="stop" class="btn btn-primary btn-sm">||</button>
+                        <button id="start" class="btn btn-primary btn-sm">&#9658;</button>
+                        <button id="minus" class="btn btn-primary btn-sm">-</button>
+                        <button id="plus" class="btn btn-primary btn-sm">+</button>
+                    </div>
+                    <br/>
+                    <script th:inline="javascript">
+                        getData([[${answer.dataForCharts}]]);
+                    </script>
+                    <div id="visualization"></div>
+                    <button id="prev" disabled="true" class="btn btn-primary btn-sm"><span>&#8592;</span></button>
+                    <button id="next" disabled="true" class="btn btn-primary btn-sm"><span>&#8594;</span></button>
+                    <button id="change" class="btn btn-primary btn-sm">+</button>
+                    <br/>
+                    <h5>Протокол розв'язку:</h5>
+                    <a th:href="@{/solve/canonical/protocol}" class="btn btn-success">Завантажити</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top" th:fragment="header">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="collapse navbar-collapse">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Particle Swarm Optimization Service</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Вийти</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Увійти</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Розв'язок задач<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a th:href="@{/solve/canonical}">Канонічний ройовий алгоритм</a></li>
+                        <li><a th:href="@{/solve/hybrid}">Гібридний ройовий алгоритм</a></li>
+                        <li><a th:href="@{/solve/adaptive}">Адаптивний ройовий алгоритм</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Алгоритми PSO<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a th:href="@{/about/canonical}">Канонічний ройовий алгоритм</a></li>
+                        <li><a th:href="@{/about/hybrid}">Гібридний ройовий алгоритм</a></li>
+                        <li><a th:href="@{/about/adaptive}">Адаптивний ройовий алгоритм</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

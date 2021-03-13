@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html   xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>PSO Solve</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="application/javascript"  th:src="@{/js/button.js}" />
+    <script type="application/javascript"  th:src="@{/js/select.js}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="col-md-3"/>
+<div class="col-md-6">
+    <div class="well bs-component">
+<div class="tab-pane fade active in" id="custom">
+    <br/>
+    <form class="form-horizontal" th:action="@{/application/portfoliosolve}" th:object="${problem}" method="post">
+        <fieldset>
+            <h4>Оберіть кількість підприємств, між якими бажаєте розподілити капітал</h4>
+            <div style="margin: 10px; margin-left:55px;">
+                <div class="col-lg-10">
+                    <a th:href="@{/application/portfolio2}">2</a>
+                    <a th:href="@{/application/portfolio3}">3</a>
+                    <a th:href="@{/application/portfolio4}">4</a>
+                    <a th:href="@{/application/portfolio5}">5</a>
+                    <a th:href="@{/application/portfolio6}">6</a>
+                    <a th:href="@{/application/portfolio7}">7</a>
+                    <a th:href="@{/application/portfolio8}">8</a>
+                    <a th:href="@{/application/portfolio9}">9</a>
+                    <a th:href="@{/application/portfolio10}">10</a>
+                </div>
+                <button class="btn-success">Вибрати</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+    </div>
+</div>
+
+
+</body>
+</html>

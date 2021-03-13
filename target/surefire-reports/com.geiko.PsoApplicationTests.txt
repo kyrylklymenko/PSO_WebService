@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.geiko.PsoApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.271 sec - in com.geiko.PsoApplicationTests

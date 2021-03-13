@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html   xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>PSO Login</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="col-md-4" />
+<div class="col-md-4">
+    <div class="well bs-component">
+        <form class="form-horizontal" th:action="@{/login}" method="post">
+            <fieldset>
+                <legend>Увійти</legend>
+                <div class="input-group" style="margin: 10px">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Логін" value=""/>
+                </div>
+                <div class="input-group" style="margin: 10px">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Пароль"/>
+                </div>
+                <div style="margin: 10px">
+                    <button type="submit" class="btn btn-success">Увійти</button>
+                    <a th:href="@{/registration}" class="btn btn-primary" role="button" aria-pressed="true">Зареєструватися</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>

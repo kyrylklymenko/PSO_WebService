@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html   xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>PSO Solve</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="application/javascript"  th:src="@{/js/button.js}" />
+    <script type="application/javascript"  th:src="@{/js/select.js}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="col-md-3"/>
+<div class="col-md-6">
+    <div class="well bs-component">
+        <h2>Канонічний ройовий алгоритм</h2>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#custom" data-toggle="tab" aria-expanded="true">Функція користувача</a></li>
+            <li class=""><a href="#test" data-toggle="tab" aria-expanded="false">Тестові функції</a></li>
+            <li class=""><a href="#properties" data-toggle="tab" aria-expanded="false">Параметри</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="custom">
+                <br/>
+                <form class="form-horizontal" th:action="@{/solve/canonical/custom}" th:object="${problem}" method="post">
+                    <fieldset>
+                        <legend>Розв'язати</legend>
+                        <h4 style="margin: 10px; margin-left:55px;">Функція</h4>
+                        <div class="form-group">
+                            <label for="function" class="col-md-2 control-label">F =</label>
+                            <div class="col-md-10">
+                                <input type="text" th:field="*{function}" placeholder="Функція" class="form-control" id="function" required="required"/>
+                            </div>
+                        </div>
+                        <div style="margin: 10px; margin-left:107px;">
+                            <button type="button" class="btn btn-primary">1</button>
+                            <button type="button" class="btn btn-primary">2</button>
+                            <button type="button" class="btn btn-primary">3</button>
+                            <button type="button" class="btn btn-primary">)</button>
+                            <button type="button" class="btn btn-primary">sin()</button>
+                            <button type="button" class="btn btn-primary">comp(,,'')</button>
+
+                        </div>
+                        <div style="margin: 10px; margin-left:107px;">
+                            <button type="button" class="btn btn-primary">4</button>
+                            <button type="button" class="btn btn-primary">5</button>
+                            <button type="button" class="btn btn-primary">6</button>
+                            <button type="button" class="btn btn-primary">(</button>
+                            <button type="button" class="btn btn-primary">cos()</button>
+                            <button type="button" class="btn btn-primary">sum(,,'')</button>
+                        </div>
+                        <div style="margin: 10px; margin-left:107px;">
+                            <button type="button" class="btn btn-primary">7</button>
+                            <button type="button" class="btn btn-primary">8</button>
+                            <button type="button" class="btn btn-primary">9</button>
+                            <button type="button" class="btn btn-primary">*</button>
+                            <button type="button" class="btn btn-primary">sqrt()</button>
+                            <button type="button" class="btn btn-primary">abs()</button>
+                        </div>
+                        <div style="margin: 10px; margin-left:107px;">
+                            <button type="button" class="btn btn-primary">+</button>
+                            <button type="button" class="btn btn-primary">0</button>
+                            <button type="button" class="btn btn-primary">-</button>
+                            <button type="button" class="btn btn-primary">/</button>
+                            <button type="button" class="btn btn-primary">pow(,)</button>
+                            <button type="button" class="btn btn-primary">x[i]</button>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:55px;">Похибка</h4>
+                        <div class="form-group">
+                            <label for="e" class="col-md-2 control-label">e =</label>
+                            <div class="col-md-10">
+                                <input type="number" step="0.1" th:field="*{e}" min="0" class="form-control" id="e" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:55px;">Розмірність задачі</h4>
+                        <div class="form-group">
+                            <label for="d" class="col-md-2 control-label">d =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{d}" min="1" th:attr="max=${properties.d}" class="form-control" id="d" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:55px;">Розмірність рою</h4>
+                        <div class="form-group">
+                            <label for="s" class="col-md-2 control-label">s =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{s}" min="1" th:attr="max=${properties.s}" class="form-control" id="s" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:55px;">Простір пошуку</h4>
+                        <div class="form-group" style=" margin-left:15px;">
+                            <label for="MaxSearchSpace" class="col-md-2 control-label" id="labelSpoiler1"></label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{maxSearchSpace}"  required ="required" value="" class="form-control" id="maxSearchSpace" />
+                            </div>
+                        </div>
+                        <div style="margin: 10px; margin-left:55px;">
+                            <button type="submit" class="btn btn-success">Розв'язати</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="test">
+                <br/>
+                <form  id = "form" class="form-horizontal" th:action="@{/solve/canonical/spherical}" th:object="${problem}" method="post">
+                    <fieldset>
+                        <legend>Розв'язати</legend>
+                        <h4 style="margin: 10px; margin-left:55px;">Функція</h4>
+                        <div class="form-group">
+                            <label for="function" class="col-md-2 control-label">F =</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="myselect">
+                                    <option value="spherical">Сферична</option>
+                                    <option value="elliptical">Еліптична</option>
+                                    <option value="schwefel2">Швефела 1.2</option>
+                                    <option value="rosenbroke">Розенброка</option>
+                                    <option value="rastrigin">Растригіна</option>
+                                    <option value="grivonk">Грівонка</option>
+                                    <option value="alpine">Алпайна</option>
+                                    <option value="schwefel">Швефела</option>
+                                    <option value="aqley">Аклея</option>
+                                    <option value="weierstrass">Веєрштраса</option>
+                                </select>
+                            </div>
+                        </div>
+                        <img id = "functionImage" style="width:600px;height:270px;" th:src="@{/images/spherical.png}" />
+                        <h4 style="margin: 10px; margin-left:55px;">Похибка</h4>
+                        <div class="form-group">
+                            <label for="testE" class="col-md-2 control-label">e =</label>
+                            <div class="col-md-10">
+                                <input type="number" step="0.1" th:field="*{e}" min="0" class="form-control" id="testE" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:55px;">Розмірність задачі</h4>
+                        <div class="form-group">
+                            <label for="testD" class="col-md-2 control-label">d =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{d}" min="1" th:attr="max=${properties.d}" class="form-control" id="testD" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:55px;">Розмірність рою</h4>
+                        <div class="form-group">
+                            <label for="testS" class="col-md-2 control-label">s =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{s}" min="1" th:attr="max=${properties.s}" class="form-control" id="testS" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:55px;">Простір пошуку</h4>
+                        <div class="form-group" >
+                            <label for="testMaxSearchSpace" class="col-md-2 control-label" id="labelSpoiler2"></label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{maxSearchSpace}"  required ="required" value="" class="form-control" id="testMaxSearchSpace" />
+                            </div>
+                        </div>
+                        <div style="margin: 10px; margin-left:55px;">
+                            <button type="submit" class="btn btn-success">Розв'язати</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="properties">
+                <br/>
+                <form  id = "propertiesForm" class="form-horizontal" th:action="@{/solve/properties/canonical}" th:object="${properties}" method="post">
+                    <fieldset>
+                        <legend>Встановити параметри</legend>
+                        <h4 style="margin: 10px; margin-left:35px;">Максимальна кількість ітерацій:</h4>
+                        <div class="form-group">
+                            <label for="maxK" class="col-md-2 control-label">k<sub>max</sub> =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{k}" min="1" class="form-control" id="maxK" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:35px;">Максимальна розмірність задачі:</h4>
+                        <div class="form-group">
+                            <label for="maxD" class="col-md-2 control-label">d<sub>max</sub> =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{d}" min="1" class="form-control" id="maxD" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:35px;">Максимальна розмірність рою:</h4>
+                        <div class="form-group">
+                            <label for="maxS" class="col-md-2 control-label">s<sub>max</sub> =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{s}" min="1" class="form-control" id="maxS" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:35px;">Інерційний параметр:</h4>
+                        <div class="form-group">
+                            <label for="w" class="col-md-2 control-label">w =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{w}" min="0" class="form-control" id="w" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:35px;">Когнітивний параметр:</h4>
+                        <div class="form-group">
+                            <label for="с1" class="col-md-2 control-label">с<sub>1</sub> =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{kogn}" min="0" class="form-control" id="с1" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:35px;">Соціальний параметр:</h4>
+                        <div class="form-group">
+                            <label for="с2" class="col-md-2 control-label">с<sub>2</sub> =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{soc}" min="0" class="form-control" id="с2" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:35px;">Кількість повторів:</h4>
+                        <div class="form-group">
+                            <label for="n" class="col-md-2 control-label">n =</label>
+                            <div class="col-md-10">
+                                <input type="number" th:field="*{n}" min="0" class="form-control" id="n" required="required"/>
+                            </div>
+                        </div>
+                        <h4 style="margin: 10px; margin-left:35px;">Критерій зупинки</h4>
+                        <div class="form-group">
+                            <label for="stopCause" class="col-md-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <select th:field="*{stopCause}" class="form-control" id="stopCause" >
+                                    <option th:value="0">Кількість ітерацій і |old - best|</option>
+                                    <option th:value="1" >Кількість ітерацій</option>
+                                    <option th:value="2" >|old - best|</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin: 10px; margin-left:35px;">
+                            <button type="submit" class="btn btn-success">Встановити</button>
+                            <button type="reset" class="btn btn-primary">Очистити</button>
+                            <a th:href="@{/solve/properties/canonical}" class="btn btn-primary">За замовчуванням</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

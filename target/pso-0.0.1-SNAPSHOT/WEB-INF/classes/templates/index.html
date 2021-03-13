@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head><title>PSO</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="col-md-2"/>
+<div class="col-md-8">
+    <div class="well bs-component">
+        <div class="col-md-12">
+            <div th:if="${isRegisterPage == true}" class="alert alert-dismissible alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Увага!</h4>
+                <p>Лист для підтвердження реєстрації відправлено на пошту</p>
+            </div>
+            <div th:if="${isActivationPage == true}" class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Вітаємо!</h4>
+                <p>Ваш акаунт активовано!</p>
+            </div>
+        </div>
+        <div align="justify">
+            <h2>Particle Swarm Optimization Service</h2>
+            <p>
+                Методи ройового інтелекту різноманітні та можуть бути використані для розв’язування задач, що виникають
+                в різних галузях діяльності людини: медицині, телекомунікації, авіації, дослідженні космосу, біології,
+                робототехніці тощо. Тому дослідження ройового інтелекту та методів, що його використовують, є
+                перспективним науковим напрямом. Невипадково у багатьох університетах студенти математичних і
+                комп’ютерних спеціальностей вивчають сучасні методи оптимізації та дослідження операцій, де розглядають,
+                зокрема й ройові алгоритми.
+            </p>
+            <img width="270 px" height = "auto" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/ParticleSwarmArrowsAnimation.gif" />
+            <p>Графічне зображення принципу роботи алгоритму. Частинки наближуються до оптимального рішення в точці (0;0).
+                Деякі з них застряли в локальному оптимумі.
+            </p>
+            <p>
+                PSO Service - це система, яка надає користувачам можливість використовувати ройові алгоритми для
+                вирішення
+                навчальних і практичних оптимізаційних задач в онлайн режимі, а також містить необхідні теоретичні
+                матеріали та засоби для проведення експериментів з дослідження і розвитку ройових алгоритмів.
+            </p>
+            <p>
+                Система дозволяє експерементувати з такими алгоритмами:
+            <ul>
+                <li><a th:href="@{/about/canonical}">Канонічний ройовий алгоритм (Зірка)</a></li>
+                <li><a th:href="@{/about/hybrid}">Гібридний ройовий алгоритм (метод Нелдер-Міда)</a></li>
+                <li><a th:href="@{/about/adaptive}">Адаптивний ройовий алгоритм</a></li>
+            </ul>
+            </p>
+            <p>
+                Користувач ресурсу має змогу обрати неохідний алгоритм, ввести цільову функцію, налаштувати основні
+                параметри для розв’язування задачі, зокрема, розмірність рою,
+                граничні межі пошуку, точність здійснення обрахунків, й отримати розв’язок задачі у зрозумілій формі.
+                Також звіт про розв'язок задачі дозволяє переглянути значення цільової функції на кожній ітерації та
+                графіки процесу розв'язку задачі.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

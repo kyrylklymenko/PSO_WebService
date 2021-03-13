@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.activation.title}">Activation E-mail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p th:text="#{email.activation.text1}">
+</p>
+<p>
+    <a th:href="@{|${baseUrl}/activation?key=${user.activationKey}|}">Activation Link</a>
+</p>
+</body>
+</html>
